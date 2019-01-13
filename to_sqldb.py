@@ -15,7 +15,7 @@ def list2db(dlist, dbname, tblname):
     try:
         db = dataset.connect('sqlite:///%s' %dbname)
         for data in dlist:
-            db[tblname].upsert(data, ['url'])
+            db[tblname].upsert(data, ['url']) # to save url unique data only.
     except Exception as e:
         print(e)
 
@@ -30,7 +30,7 @@ def tbl2txt(dbname, tblname, cols, ofn):
         outfile.write('%s\n' %('\t'.join(item)))
     outfile.close()
 
-def txt2tbl(fn, dbname, tablename):
+def txt2tbl(dbname, tablename, cols, pkey, fn):
     db = dataset.connect('sqlite:///%s' %dbname)
     infile = open(fn, 'r', encoding='utf-8')
     lines = infile.readlines()
@@ -39,16 +39,14 @@ def txt2tbl(fn, dbname, tablename):
     record = {}
     for l in lines:
         tab = l.split('\t')
-        record['title'] = tab[0]
-        record['content'] = tab[1]
-        if len(tab) > 2 :
-            url = tab[2]
-        else: url = ''
-        record['url'] = url
-        idx += 1
-        db[tablename].upsert(record,['url'])
+        if len(tab) != len(cols) :
+            print('%s must have %d columns' %(l, ','.join(cols)))
+            continue
+        for i, col in enumerate(cols):
+            record[col] = tab[i]
+        db[tablename].upsert(record, [pkey])
 
-def tmp_f(infn):
+def file2records(infn):
     results = []
     with open(infn, 'r', encoding='utf-8') as infile:
         for l in infile:
@@ -65,10 +63,10 @@ def tmp_f(infn):
 if __name__ == "__main__":
     try:
         #initdb('data/psydb.db', 'psynews', pkey='url')
-        results=tmp_f('psynews.txt')
+        #txt2tbl('data/psydb.db', 'psyterm_list', ['headword', 'engword', 'summary'], pkey='headword', 'term_list.txt')
+        #txt2tbl('data/psydb.db', 'psynews',['title, 'content', 'url'], 'url', 'psynews.txt')
+        results=file2records('psynews.txt')
         list2db(results,'data/psydb.db', 'psynews')
-        #txt2tbl('psynews.txt','data/psydb.db', 'psynews')
         tbl2txt('data/psydb.db', 'psynews', ['title', 'content'], 'psynews.body.txt')
-
     except Exception as e:
         print(e)
