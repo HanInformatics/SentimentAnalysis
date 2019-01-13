@@ -6,7 +6,7 @@ We study sentiment analysis as "social pathology through languages".
 So, we scrape psychiatric news and terminology and analyse the data so as to mine sentiment information with psychiatric texts.
 
 
-**[ 언어가 감성적, 정신의 문제에 얼마나 중요한지를 보이는 문구 ]** 
+**언어가 감성적, 정신의 문제에 얼마나 중요한지를 보이는 문구** 
 
 From an article in 한국정신의학신문
 
