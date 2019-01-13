@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import urllib
+from to_sqldb import *
 
 def scrape_urls(pages=10):
     full_urls=[]
@@ -47,11 +48,14 @@ def scrape_news(url, ofile, metafile):
         if c == '' or t == '': return
         cc = c.replace('\r', '')
         #cc = c.replace('^m', '')
+        #results=tmp_f('psynews.txt')
         cc = cc.replace('\n', '')
         tnc = [t,cc]
-        ofile.write('%s\t%s\n' %(t, cc))
+        ofile.write('%s\t%s\t%s\n' %(t, cc, url))
         metafile.write("%s\t%s\n" %(t, url))
+        url_content={'title':t, 'content':cc, 'url':url}
         print('done', url)
+        return url_content
     except Exception as e:
         print(e)
 
@@ -60,16 +64,19 @@ def scrape_pages(full_urls, filename):
     ofile = open(filename, 'w')
     metafile = open(filename +'.meta', 'w')
     n_doc = 0
+    o_list = []
     for u in full_urls:
         print('# doc', n_doc)
-        scrape_news(u, ofile, metafile)
+        url_rst=scrape_news(u, ofile, metafile)
+        o_list.append(url_rst)
         n_doc += 1
     ofile.close()
     metafile.close()
+    return o_list
 
 if __name__ == "__main__":
     try:
         full_urls=scrape_urls(100)
-        scrape_pages(full_urls, 'psynews.txt')
+        results=scrape_pages(full_urls, 'psynews.txt')
     except Exception as e:
         print(e)
