@@ -11,3 +11,8 @@ From "Emotion and Illness" in How Emotions are made, Lisa Feldman Barrett. 2017.
 .... Most people attribute colds to a single cause, namely, a cold virus. 
 And yet, when scientists place a cold virus into the noses of one hundred people, only 25-40 percent get sick. 
 So a cold virus cannot be the essence of a cold - somthing more complext must be going on. The virus is necessary but not sufficient. ....
+
+
+From an article in 한국정신의학신문
+
+.... 정신과 전문의에게 상담 치료를 받는 것을 권합니다. 상담 치료는 "언어 의존적"이기 때문에, 모국어로 치료를 받아야 가장 효율적이라, 외국에서 받는 것보다는 국내에서 받는 것이 효과적일 거예요....
