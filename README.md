@@ -23,4 +23,5 @@ So a cold virus cannot be the essence of a cold - "something more complext must 
 
 
 **생각이 언어로 표출된다는 전제 하에, 좋고 나쁨이 생각과 언어에 의해 결정된다. 햄릿이 말하기를**
+
 'There is nothing either good or bad but thinking makes it so'...
