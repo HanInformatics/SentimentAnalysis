@@ -20,3 +20,7 @@ From "Emotion and Illness" in How Emotions are made, Lisa Feldman Barrett. 2017.
 .... Most people attribute colds to a single cause, namely, a cold virus. 
 And yet, when scientists place a cold virus into the noses of one hundred people, only 25-40 percent get sick. 
 So a cold virus cannot be the essence of a cold - "something more complext must be going on". The virus is necessary but not sufficient. ....
+
+
+**생각이 언어로 표출된다는 전제 하에, 좋고 나쁨이 생각과 언어에 의해 결정된다. 햄릿이 말하기를**
+'There is nothing either good or bad but thinking makes it so'...
