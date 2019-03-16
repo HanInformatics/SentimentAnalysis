@@ -86,7 +86,8 @@ e_date = "2018.12.31"
 
 if __name__ == "__main__":
     try:
-        do_scrape(query, s_date, e_date)
+        #do_scrape(query, s_date, e_date)
+        do_scrape(sys.argv[1], sys.argv[2], sys.argv[3])
     except Exception as e:
         print(e)
 
