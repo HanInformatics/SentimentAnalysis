@@ -1,4 +1,4 @@
-# SentimentAnalysis
+# Sentiment/Affective Analysis
 
 
 We study sentiment analysis as "social pathology through languages". 
