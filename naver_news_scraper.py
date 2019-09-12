@@ -5,7 +5,7 @@
 from bs4 import BeautifulSoup
 import json
 import re
-import sys
+import os, sys
 import requests
 import time, random
 
@@ -44,7 +44,8 @@ def do_scrape(query, s_date, e_date):
     page = 1
     s_from = s_date.replace(".", "")
     e_to = e_date.replace(".", "")
-    ofile = open(query + s_date + '-' + e_date +'.txt', 'w', encoding='utf-8')
+    filename = query + s_date + '-' + e_date +'.txt'
+    ofile = open(filename, 'w', encoding='utf-8')
     while page < 10**8:
         try:
             url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=0&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(page)
@@ -69,12 +70,21 @@ def do_scrape(query, s_date, e_date):
                     #pdate, title, btext, pcompany
                     ofile.write("{}\t{}\t{}\t{}\n".format(news_data[1], urls['href'], news_data[0], news_data[2]))
                     #ofile.write("{}\t{}\t{}\n".format(news_data[1], news_data[0], news_data[2]))
-                    ofile.write("{}\t{}\n".format(news_data[0], news_data[2]))
                     ofile.flush()
                     time.sleep(random.randint(0,3))
                 else:
                     print(urls['href'])
             page += 10
+            '''
+            os.system('mv cur_end%s > pre_end%s' %(query, query))
+            os.system('tail -n 3 %s > cur_end%s' %(filename,query))
+            os.system('diff pre_end%s cur_end%s | wc -l > rst' %(query, query))
+            with open('rst', 'r') as f:
+                r=f.read().strip()
+                if r =='0':
+                    'No more scraped'
+                    exit()
+            '''
         except Exception as e:
             print(e)
     ofile.close()
@@ -86,8 +96,10 @@ e_date = "2018.12.31"
 
 if __name__ == "__main__":
     try:
-        #do_scrape(query, s_date, e_date)
-        do_scrape(sys.argv[1], sys.argv[2], sys.argv[3])
+        if len(sys.argv) > 2 :
+            do_scrape(sys.argv[1], sys.argv[2], sys.argv[3])
+        else:
+            do_scrape(query, s_date, e_date)
     except Exception as e:
         print(e)
 
